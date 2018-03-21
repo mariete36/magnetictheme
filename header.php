@@ -24,8 +24,13 @@
 
     <div id="menu_icon"></div>
     <?php
+    $menu = 'header-menu';
+    if(wp_is_mobile()) {
+        $menu = 'header-mob';
+    }
+
     wp_nav_menu( array(
-            'theme_location' => 'header-menu',
+            'theme_location' => $menu,
             'container' => 'nav'
     ));
     ?>
