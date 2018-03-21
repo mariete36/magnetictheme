@@ -51,3 +51,12 @@ function sk_wp_enqueue_scripts() {
         wp_enqueue_script($id);
     }
 }
+
+function menulittlemakura() {
+    register_nav_menu('header-menu',__('Header Menu', 'littlemakura'));
+    register_nav_menu('footer',__('Footer Menu', 'littlemakura'));
+    register_nav_menu('header-mob',__('Header Mob Menu', 'littlemakura'));
+}
+add_action('init', 'menulittlemakura');
+
+function getPrevNext(){}
