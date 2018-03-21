@@ -58,5 +58,38 @@ function menulittlemakura() {
     register_nav_menu('header-mob',__('Header Mob Menu', 'littlemakura'));
 }
 add_action('init', 'menulittlemakura');
-
+/*
 function getPrevNext(){}
+*/
+
+function getPrevNext_sakuraloul()
+{
+    $pagelist = get_pages('sort_column=menu_order&sort_order=asc');
+    $pages = array();
+    foreach ($pagelist as $page) {
+        $pages[] += $page->ID;
+    }
+
+    $current = array_search(get_the_ID(), $pages);
+    $prevID = (isset($pages[$current - 1])) ? $pages[$current - 1] : '';
+    $nextID = (isset($pages[$current + 1])) ? $pages[$current + 1] : '';
+
+
+    if (!empty($prevID) || !empty($nextID)) {
+        $html = '<div class="work_nav">';
+        $html .= '<ul class="btn clearfix">';
+
+        if (!empty($prevID)) {
+            $html .= '<li><a class="previous" data-title="Previous" href="' . get_permalink($prevID) . '" title="' . get_the_title($prevID) . '"></a></li>';
+        }
+
+        $html .= '<li><a href="' . get_home_url() . '" class="grid" data-title="Home"></a></li>';
+        if (!empty($nextID)) {
+            $html .= '<li><a class="next" data-title="Next" href="' . get_permalink($nextID) . '" title="' . get_the_title($nextID) . '"></a></li>';
+        }
+        $html .= '</ul>';
+        $html .= '</div>';
+
+        echo $html;
+    }
+}
